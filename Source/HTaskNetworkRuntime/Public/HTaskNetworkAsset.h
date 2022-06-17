@@ -6,9 +6,8 @@
 #include "UObject/NoExportTypes.h"
 #include "HTaskNetworkAsset.generated.h"
 
-class UHTaskNetworkCompoundTask;
-class UHTaskNetworkMethod;
-class UHTaskNetworkPrimitiveTask;
+class UHTaskNetworkTask_Primitive;
+class UHTaskNetworkTask_Compound;
 
 /**
  * 

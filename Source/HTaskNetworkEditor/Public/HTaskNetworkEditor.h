@@ -50,7 +50,6 @@ protected:
 	void OnSelectedNodesChanged(const TSet<class UObject*>& NewSelection);
 private:
 	void CreateInternalWidgets();
-	void LazyCreateCommandList();
 	TSharedRef<SGraphEditor> CreateGraphEditorWidget(UEdGraph* InGraph);
 
 	TSharedPtr<class IDetailsView> DetailsView;

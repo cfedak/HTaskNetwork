@@ -136,13 +136,17 @@ void HTaskNetworkEditor::RestoreTaskNetwork()
 	const bool IsNewGraph = Graph == NULL;
 	if (IsNewGraph)
 	{
-		Graph = Cast<UHTaskNetworkEdGraph>(FBlueprintEditorUtils::CreateNewGraph(TaskNetwork, TEXT("Task Network"), UHTaskNetworkEdGraph::StaticClass(), UEdGraphSchema_HTaskNetwork::StaticClass()));
+		// create a new Graph editor
+		Graph = Cast<UHTaskNetworkEdGraph>(
+			FBlueprintEditorUtils::CreateNewGraph(TaskNetwork,
+				TEXT("Task Network"),
+				UHTaskNetworkEdGraph::StaticClass(),
+				UEdGraphSchema_HTaskNetwork::StaticClass()));
 		TaskNetwork->HTNGraph = Graph;
 		auto Schema = Graph->GetSchema();
 		Schema->CreateDefaultNodesForGraph(*Graph);
 	}
 	
-
 	TSharedRef<FTabPayload_UObject> Payload = FTabPayload_UObject::Make(Graph);
 	TSharedPtr<SDockTab> DocumentTab = DocumentManager->OpenDocument(Payload, FDocumentTracker::RestorePreviousDocument);
 }
@@ -189,18 +193,9 @@ void HTaskNetworkEditor::CreateInternalWidgets()
 	DetailsViewArgs.bUpdatesFromSelection = false;
 	DetailsViewArgs.NameAreaSettings = FDetailsViewArgs::HideNameArea;
     DetailsView = PropertyEditorModule.CreateDetailView(DetailsViewArgs);
-    DetailsView->SetObject(NULL);
+    DetailsView->SetObject(nullptr);
     //DetailsView->SetIsPropertyEditingEnabledDelegate(FIsPropertyEditingEnabled::CreateSP(this, &HTaskNetworkEditor::IsPropertyEditable));
     //DetailsView->OnFinishedChangingProperties().AddSP(this, &HTaskNetworkEditor::OnFinishedChangingProperties);
-}
-
-void HTaskNetworkEditor::LazyCreateCommandList()
-{
-	if (AdditionalEditorCommands.IsValid()) { return; }
-	AdditionalEditorCommands = MakeShared<FUICommandList>();
-	AdditionalEditorCommands->MapAction(FGenericCommands::Get().Delete,
-		FExecuteAction::CreateRaw(this, &HTaskNetworkEditor::DeleteSelectedNodes),
-		FCanExecuteAction::CreateRaw(this, &HTaskNetworkEditor::CanDeleteNodes));
 }
 
 TSharedRef<SGraphEditor> HTaskNetworkEditor::CreateGraphEditorWidget(UEdGraph* InGraph)
@@ -220,13 +215,13 @@ TSharedRef<SGraphEditor> HTaskNetworkEditor::CreateGraphEditorWidget(UEdGraph* I
 		[
 			SNew(SHorizontalBox)
 			+ SHorizontalBox::Slot()
-		.HAlign(HAlign_Center)
-		.FillWidth(1.f)
-		[
-			SNew(STextBlock)
-			.Text(LOCTEXT("TestGraphLabel", "HTNGraph"))
-		.TextStyle(FEditorStyle::Get(), TEXT("GraphBreadcrumbButtonText"))
-		]
+			.HAlign(HAlign_Center)
+			.FillWidth(1.f)
+			[
+				SNew(STextBlock)
+				.Text(LOCTEXT("TestGraphLabel", "HTNGraph"))
+			.TextStyle(FEditorStyle::Get(), TEXT("GraphBreadcrumbButtonText"))
+			]
 		];
 
 	// Make full graph editor
