@@ -3,10 +3,10 @@
 #include "CoreMinimal.h"
 #include "PrimitiveTask.h"
 #include "CompoundTask.h"
-#include "HTNDomain.generated.h"
+#include "HTaskNetworkDomain.generated.h"
 
 USTRUCT()
-struct HTASKNETWORKRUNTIME_API FHTNDomain
+struct HTASKNETWORKRUNTIME_API FHTaskNetworkDomain
 {
 	GENERATED_BODY()
 

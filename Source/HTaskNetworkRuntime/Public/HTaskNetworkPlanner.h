@@ -5,14 +5,14 @@
 #include "CoreMinimal.h"
 #include "WorldState.h"
 #include "HTNDecompHistoryItem.h"
-#include "HTNDomain.h"
-#include "HTNPlanner.generated.h"
+#include "HTaskNetworkDomain.h"
+#include "HTaskNetworkPlanner.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class HTASKNETWORKRUNTIME_API UHTNPlanner: public UObject
+class HTASKNETWORKRUNTIME_API UHTaskNetworkPlanner: public UObject
 {
 	GENERATED_BODY()
 protected:
@@ -22,10 +22,10 @@ protected:
 	TArray<FName> FinalPlan;
 	FName CurrentTask;
 public:
-	UHTNPlanner();
-	~UHTNPlanner();
+	UHTaskNetworkPlanner();
+	~UHTaskNetworkPlanner();
 
-	bool CreatePlan(FHTNDomain& Domain, FWorldState WorldState, TArray<FName>& PlanOut);
+	bool CreatePlan(FHTaskNetworkDomain& Domain, FWorldState WorldState, TArray<FName>& PlanOut);
 	void RecordDecompositionOfTask();
 	void RestoreToLastDecomposedTask();
 };

@@ -1,8 +1,8 @@
 #include "Misc/AutomationTest.h"
-#include "HTNDomain.h"
+#include "HTaskNetworkDomain.h"
 #include "Operator.h"
 #include "Condition.h"
-#include "HTNPlanner.h"
+#include "HTaskNetworkPlanner.h"
 
 BEGIN_DEFINE_SPEC(FDomainTest, "HTNRuntime.DomainTests", EAutomationTestFlags::ProductFilter | EAutomationTestFlags::ApplicationContextMask)
 END_DEFINE_SPEC(FDomainTest)
@@ -14,7 +14,7 @@ void FDomainTest::Define()
 
 	Describe("Add Something", [this]() {
 		It("should plan", [this]() {
-			FHTNDomain Domain;
+			FHTaskNetworkDomain Domain;
 			FPrimitiveTask& SprintToEnemy = Domain.PrimitiveTask(TEXT("SprintToEnemy"));
 			UOperator* Op = NewObject<UOperator>();
 			USetEffect* Set = NewObject<USetEffect>();
@@ -53,7 +53,7 @@ void FDomainTest::Define()
 			WhenEnemyMissing.Subtasks.Push(TEXT("CheckBridge"));
 			BeTrunkThumper.Methods.Push(WhenEnemyMissing);
 
-			UHTNPlanner* Planner = NewObject<UHTNPlanner>();
+			UHTaskNetworkPlanner* Planner = NewObject<UHTaskNetworkPlanner>();
 
 			TArray<FName> Plan;
 			FWorldState State;

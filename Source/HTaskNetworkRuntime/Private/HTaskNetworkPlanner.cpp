@@ -1,18 +1,18 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "HTNPlanner.h"
+#include "HTaskNetworkPlanner.h"
 #include "Operator.h"
 
-UHTNPlanner::UHTNPlanner()
+UHTaskNetworkPlanner::UHTaskNetworkPlanner()
 {
 }
 
-UHTNPlanner::~UHTNPlanner()
+UHTaskNetworkPlanner::~UHTaskNetworkPlanner()
 {
 }
 
-bool UHTNPlanner::CreatePlan(FHTNDomain& Domain, FWorldState WorldState, TArray<FName>& PlanOut)
+bool UHTaskNetworkPlanner::CreatePlan(FHTaskNetworkDomain& Domain, FWorldState WorldState, TArray<FName>& PlanOut)
 {
 	WorkingWorldState = WorldState;
 	DecompHistoryStack.Reset();
@@ -56,7 +56,7 @@ bool UHTNPlanner::CreatePlan(FHTNDomain& Domain, FWorldState WorldState, TArray<
 	return true;
 }
 
-void UHTNPlanner::RecordDecompositionOfTask()
+void UHTaskNetworkPlanner::RecordDecompositionOfTask()
 {
 	DecompHistoryStack.Emplace();
 	DecompHistoryStack.Last().CurrentTask = CurrentTask;
@@ -65,7 +65,7 @@ void UHTNPlanner::RecordDecompositionOfTask()
 	DecompHistoryStack.Last().FinalPlan = FinalPlan;
 }
 
-void UHTNPlanner::RestoreToLastDecomposedTask()
+void UHTaskNetworkPlanner::RestoreToLastDecomposedTask()
 {
 	FHTNDecompHistoryItem Item = DecompHistoryStack.Pop();
 	WorkingWorldState = Item.State;

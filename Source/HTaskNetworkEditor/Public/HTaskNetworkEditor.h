@@ -25,6 +25,7 @@ public:
 	virtual FText GetToolkitToolTipText() const override;
 	virtual FLinearColor GetWorldCentricTabColorScale() const override;
 	virtual FString GetWorldCentricTabPrefix() const override;
+	virtual void SaveAsset_Execute() override;
 	// --
 
 	// -- FWorkflowCentricApplication interface

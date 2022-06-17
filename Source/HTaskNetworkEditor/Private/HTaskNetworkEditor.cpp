@@ -14,6 +14,7 @@
 #include "HTNEditorNode_PrimitiveTask.h"
 #include "HTaskNetworkAsset.h"
 #include "HTNEditorNode_Method.h"
+#include "Chaos/PBDCollisionConstraintsContact.h"
 
 #define LOCTEXT_NAMESPACE "FHTaskNetworkEditorModule"
 
@@ -55,6 +56,19 @@ FLinearColor HTaskNetworkEditor::GetWorldCentricTabColorScale() const
 FString HTaskNetworkEditor::GetWorldCentricTabPrefix() const
 {
     return TEXT("HTN");
+}
+
+void HTaskNetworkEditor::SaveAsset_Execute()
+{
+	if (UpdateGraphEdPtr.IsValid())
+	{
+		auto Graph = Cast<UHTaskNetworkEdGraph>(UpdateGraphEdPtr.Pin()->GetCurrentGraph());
+		if (IsValid(Graph))
+		{
+			Graph->UpdateAsset(0);
+		}
+	}
+	FWorkflowCentricApplication::SaveAsset_Execute();
 }
 
 void HTaskNetworkEditor::RegisterToolbarTab(const TSharedRef<class FTabManager>& InTabManager)
